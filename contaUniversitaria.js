@@ -49,9 +49,38 @@ class contaUniversitaria {
     }
 }
 
-class contaUniversitaria extends ContaBancaria {
+class ContaBancaria {
+    constructor(agencia, numero, tipo, saldo) {
+        this.agencia = agencia;
+        this.numero = numero;
+        this.tipo = tipo;
+        this.saldo = saldo;
+    }
+
+    getSaldo() {
+        return this.saldo;
+    }
+
+    setSaldo(novoSaldo) {
+        this.saldo = novoSaldo;
+    }
+
+    sacar(valor) {
+        if (valor <= this.saldo) {
+            this.saldo -= valor;
+            return true;
+        }
+        return false;
+    }
+
+    depositar(valor) {
+        this.saldo += valor;
+    }
+}
+
+class ContaCorrente extends ContaBancaria {
     constructor(agencia, numero, saldo, cartaoCredito) {
-        super(agencia, numero, 'corrente', saldo);
+        super(agencia, numero, "Conta Corrente", saldo);
         this.cartaoCredito = cartaoCredito;
     }
 
@@ -59,42 +88,31 @@ class contaUniversitaria extends ContaBancaria {
         return this.cartaoCredito;
     }
 
-    setCartaoCredito(cartaoCredito) {
-        this.cartaoCredito = cartaoCredito;
+    setCartaoCredito(novoCartaoCredito) {
+        this.cartaoCredito = novoCartaoCredito;
     }
 }
 
-class contaUniversitaria extends contaUniversitaria {
+class ContaPoupanca extends ContaBancaria {
     constructor(agencia, numero, saldo) {
-        super(agencia, numero, 'poupanca', saldo);
+        super(agencia, numero, "Conta Poupança", saldo);
     }
 }
 
-class ContaUniversitaria extends contaUniversitaria {
+class ContaUniversitaria extends ContaBancaria {
     constructor(agencia, numero, saldo) {
-        super(agencia, numero, 'universitaria', saldo);
+        super(agencia, numero, "Conta Universitária", saldo);
     }
 
     sacar(valor) {
-        if (valor > 0 && valor <= 500 && valor <= this.saldo) {
+        if (valor <= 500 && valor <= this.saldo) {
             this.saldo -= valor;
             return true;
-        } else {
-            return this.sacar;
         }
+        return false;
     }
 }
 
-// Exemplo de uso:
-
-const contaUniversitaria = new ContaUniversitaria("001", "12345", 1000.0);
-console.log(`Saldo da conta universitária: R$${contaUniversitaria.getSaldo()}`);
-
-contaUniversitaria.sacar(200);
-console.log(`Saque de R$200 realizado com sucesso. Saldo atual: R$${contaUniversitaria.getSaldo()}`);
-
-contaUniversitaria.sacar(600);
-console.log(`Tentativa de saque de R$600. Saldo atual: R$${contaUniversitaria.getSaldo()}`);
 
 
 

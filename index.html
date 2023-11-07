@@ -35,5 +35,72 @@
     <div id="resultado"></div>
 
     <script type="modules" src="contaBancaria.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        
+<h1>Gerenciador de Contas Bancárias</h1>
+    
+    </header
+
+    <div class="container">
+        <div class="input-section">
+            <h2>Inserir Conta</h2>
+            
+<label for="agencia">Agência:</label>
+            
+<input type="text" id="agencia">
+            
+           
+<label for="numero">Número da Conta:</label>
+            
+           
+<input type="text" id="numero">
+            <label for="tipo">Tipo de Conta:</label>
+            
+           
+<select id="tipo">
+                
+               
+<option value="corrente">Conta Corrente</option>
+                <option value="poupanca">Conta Poupança</option>
+                <option value="universitaria">Conta Universitária</option>
+            </select>
+            
+
+           
+<label for="saldo">Saldo:</label>
+            
+           
+<input type="text" id="saldo">
+            <button onclick="inserirConta()">Inserir</button>
+        </div>
+        
+       
+<div class="extrato-section">
+            <h2>Extrato</h2>
+            
+<button onclick="visualizarContas()">Visualizar</button>
+            <button onclick="gerarExtrato()">Extrato</button>
+            
+<button onclick="deletarConta()">Deletar</button>
+            <div id="extrato"></div>
+        
+</div>
+    
+</div>
+    <footer>
+        <p>© 2023 Seu Nome</p>
+    
+    </footer
+</footer>
+    <script src="script.js"></script>
 </body>
+
+
 </html>
+<body>
+    
+   
