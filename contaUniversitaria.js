@@ -57,16 +57,8 @@ class ContaBancaria {
         this.saldo = saldo;
     }
 
-    getSaldo() {
-        return this.saldo;
-    }
-
-    setSaldo(novoSaldo) {
-        this.saldo = novoSaldo;
-    }
-
     sacar(valor) {
-        if (valor <= this.saldo) {
+        if (this.saldo >= valor) {
             this.saldo -= valor;
             return true;
         }
@@ -80,38 +72,73 @@ class ContaBancaria {
 
 class ContaCorrente extends ContaBancaria {
     constructor(agencia, numero, saldo, cartaoCredito) {
-        super(agencia, numero, "Conta Corrente", saldo);
+        super(agencia, numero, 'Conta Corrente', saldo);
         this.cartaoCredito = cartaoCredito;
-    }
-
-    getCartaoCredito() {
-        return this.cartaoCredito;
-    }
-
-    setCartaoCredito(novoCartaoCredito) {
-        this.cartaoCredito = novoCartaoCredito;
     }
 }
 
 class ContaPoupanca extends ContaBancaria {
     constructor(agencia, numero, saldo) {
-        super(agencia, numero, "Conta Poupança", saldo);
+        super(agencia, numero, 'Conta Poupança', saldo);
     }
 }
 
 class ContaUniversitaria extends ContaBancaria {
     constructor(agencia, numero, saldo) {
-        super(agencia, numero, "Conta Universitária", saldo);
+        super(agencia, numero, 'Conta Universitária', saldo);
     }
 
     sacar(valor) {
-        if (valor <= 500 && valor <= this.saldo) {
-            this.saldo -= valor;
-            return true;
+        if (valor <= 500) {
+            return super.sacar(valor);
         }
         return false;
     }
 }
+
+const contas = [];
+
+function inserirConta() {
+    const agencia = document.getElementById("agencia").value;
+    const numero = document.getElementById("numero").value;
+    const tipo = document.getElementById("tipo").value;
+    const saldo = parseFloat(document.getElementById("saldo").value);
+
+    if (agencia && numero && tipo && !isNaN(saldo)) {
+        let novaConta;
+
+        if (tipo === 'corrente') {
+            const cartaoCredito = confirm('Esta conta terá cartão de crédito?');
+            novaConta = new ContaCorrente(agencia, numero, saldo, cartaoCredito);
+        } else if (tipo === 'poupanca') {
+            novaConta = new ContaPoupanca(agencia, numero, saldo);
+        } else {
+            novaConta = new ContaUniversitaria(agencia, numero, saldo);
+        }
+
+        contas.push(novaConta);
+        limparCampos();
+    }
+}
+
+function visualizarContas() {
+    const extrato = document.getElementById("extrato");
+    extrato.innerHTML = '';
+
+    contas.forEach((conta, index) => {
+        extrato.innerHTML += `<p>${index + 1}. Agência: ${conta.agencia}, Número: ${conta.numero}, Tipo: ${conta.tipo}, Saldo: R$ ${conta.saldo.toFixed(2)}</p>`;
+    });
+}
+
+function gerarExtrato() {
+    const extrato = document.getElementById("extrato");
+    extrato.innerHTML = '';
+
+    let saldoTotal = 0;
+
+    contas.forEach(conta, index) => 
+        extrato.innerHTML += `<p>${index + 1}. Agência: ${conta.agencia}, Número: ${conta.numero}, Tipo
+
 
 
 
