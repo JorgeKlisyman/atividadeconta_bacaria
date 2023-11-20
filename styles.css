@@ -22,11 +22,13 @@ body {
     padding: 0;
 }
 
-header {
-    background-color: #854f72;
+h1 {
+    background-color: #8f3971;
     color: white;
-    text-align: center;
-    padding: 10px;
+    text-align: left;
+    padding: 15px;
+    bottom: 10;
+
 }
 
 .container {
@@ -74,7 +76,7 @@ footer {
     text-align: center;
     padding: 5px;
     position: absolute;
-    bottom: 0;
+    bottom: 5;
     width: 100%;
 }
 
